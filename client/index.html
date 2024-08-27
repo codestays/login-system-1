@@ -16,6 +16,10 @@
         height:100vh; display:flex; justify-content:center; align-items:center;
     }
 
+    .login-card{
+        display:flex; flex-direction:column; height:400px; width:330px; background-color:none;
+    }
+
     .card-header{
         display:flex; flex-direction:column; align-items:center;
     }
@@ -28,6 +32,7 @@
         font:14px;
     }
 
+
     .credential-input{
         height:40px; width:330px; border:1px black solid; border-radius:10px; display:flex; align-items:center; justify-content:center;
     }
@@ -36,11 +41,23 @@
         height:90%; width:94%; outline:none; border:none;
     }
 
+    .user-input-container{
+        height:90%; width:96%; display:flex; align-items:center;
+    }
+
+    .remember-forgot-container{
+        display:flex; justify-content:space-between;
+    }.remember{
+        display:flex; align-items:center;
+    }.checkbox{
+        height:11px; width:11px; border-radius:2px; background-color:none;
+    }
+
 </style>
 
 <body>
     <container class="card-main-container">
-        <div class="login-card" style="display:flex; flex-direction:column; height:400px; width:330px; background-color:none;">
+        <div class="login-card">
             <div class="card-header">
                 <h1 class="welcome-back">Welcome back!</h1>
                 <p class="header-message">Please enter your details to continue</p>
@@ -50,9 +67,31 @@
                 <div class="input-container">
                     <p>Email</p>
                     <div class="credential-input">
-                        <input class="card-user-input" type="text" placeholder="Enter your email">
+                        <div class="user-input-container"">
+                            <input class="card-user-input" type="text" placeholder="Enter your email">
+                        </div>
                     </div>
                 </div>
+                <div class="input-container">
+                    <p>Email</p>
+                    <div class="credential-input">
+                        <div class="user-input-container">
+                            <input class="card-user-input" type="text" placeholder="Enter your email">
+                            <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.0349 3.03169C8.39404 3.03169 7.06494 4.36079 7.06494 6.00164C7.06494 7.6425 8.39404 8.9716 10.0349 8.9716C11.6758 8.9716 13.0048 7.6425 13.0048 6.00164C13.0007 4.36079 11.6716 3.03169 10.0349 3.03169ZM10.0349 5.03354C9.50161 5.03354 9.06679 5.46837 9.06679 6.00164C9.06679 6.24777 8.86988 6.44468 8.62376 6.44468C8.37763 6.44468 8.18072 6.24777 8.18072 6.00164C8.18072 4.98021 9.01346 4.14748 10.0349 4.14748C10.281 4.14748 10.4779 4.34438 10.4779 4.59051C10.4779 4.83664 10.2769 5.03354 10.0349 5.03354Z" fill="black" fill-opacity="0.5"/>
+                                <path d="M19.7447 5.333C10.523 -5.27515 2.18748 3.12194 0.202042 5.44786C-0.0645969 5.75962 -0.0686991 6.21906 0.19794 6.53082C9.3006 17.1554 17.5664 9.18081 19.7447 6.6826C20.0851 6.297 20.0851 5.7227 19.7447 5.333ZM10.0349 10.2186C7.70486 10.2186 5.81788 8.33166 5.81788 6.00164C5.81788 3.67163 7.70486 1.78464 10.0349 1.78464C12.3649 1.78464 14.2519 3.67163 14.2519 6.00164C14.2519 8.33166 12.3608 10.2186 10.0349 10.2186Z" fill="black" fill-opacity="0.5"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="remember-forgot-container">
+                    <div class="remember">
+                        <input class="checkbox" type="checkbox"></input>
+                        <p>Remember me</p>
+                    </div>
+                    <p>Forgot password?</p>
+                </div>
+
             </form>
         </div>
     </container>
