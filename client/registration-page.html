@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Registration</title>
     </head>
 
     <style>
@@ -40,6 +40,21 @@
         input{
             height:100%; width:100%; outline:none; border:none;
         }
+
+        #register{
+            background-color:#0072DD; color:white; border:none; cursor:pointer;
+        }#register:hover{
+            background-color:#007ef4;
+        }
+
+        .p-links:hover{
+            text-decoration:underline;
+        }
+
+        form{
+            display:flex; flex-direction:column; gap:20px;
+        }
+        
     </style>
 
     <body>
@@ -50,7 +65,7 @@
                     <p>Please enter your details to continue</p>
                 </div>
 
-                <form style="display:flex; flex-direction:column; gap:20px;">
+                <form>
                     <div class="credential-container">
                         <p>Name</p>
                         <div class="input-container">
@@ -59,6 +74,42 @@
                             </div>
                         </div>
                     </div>
+                    <div class="credential-container">
+                        <p>Surname</p>
+                        <div class="input-container">
+                            <div class="ml-mr-input-container">
+                                <input type="text" placeholder="Enter your surname">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="credential-container">
+                        <p>Email</p>
+                        <div class="input-container">
+                            <div class="ml-mr-input-container">
+                                <input type="text" placeholder="Enter your email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="credential-container">
+                        <p>Password</p>
+                        <div class="input-container">
+                            <div class="ml-mr-input-container">
+                                <input type="password" placeholder="Enter your password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="credential-container">
+                        <p>Retype password</p>
+                        <div class="input-container">
+                            <div class="ml-mr-input-container">
+                                <input type="password" placeholder="Retype your password">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="input-container" id="register">
+                        Register
+                    </button>
                 </form>
             </div>
 
