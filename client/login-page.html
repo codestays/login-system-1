@@ -9,7 +9,7 @@
 
     <style>
         *{
-            margin:0; padding:0; font-family:Sans-Serif;
+            margin:0; padding:0; font-family:Sans-Serif; text-decoration:none;
         }
 
         .card-main-container{
@@ -17,7 +17,7 @@
         }
 
         .login-card{
-            display:flex; flex-direction:column; width:360px; background-color:none;
+            display:flex; flex-direction:column; width:360px;
         }
 
         .card-header{
@@ -34,7 +34,7 @@
 
 
         .credential-input{
-            height:40px; width:100%; border:1px black solid; border-radius:10px; display:flex; align-items:center; justify-content:center;
+            height:40px; width:100%; border:1px black solid; border-radius:10px; display:flex; align-items:center; justify-content:center; background-color:white;
         }
 
         .card-user-input{
@@ -52,7 +52,9 @@
         }.checkbox{
             height:14px; width:14px; border-radius:2px; background-color:none;
         }.forgot{
-            color:#0072DD; font-weight:600; cursor:pointer;
+            color:#0072DD; cursor:pointer;
+        }.forgot:hover{
+            text-decoration:underline;
         }
 
         .login-button{
@@ -71,7 +73,9 @@
         }
 
         .sign-in-google{
-            display:flex; gap:4px; cursor:pointer;
+            display:flex; align-items:center; justify-content:center; gap:4px; cursor:pointer;
+        }#sign-in-ggl{
+            cursor:pointer;
         }
 
         .register-section{
@@ -111,7 +115,7 @@
                         <p>Email</p>
                         <div style="height:10px;"></div> <!-- horizontal space -->
                         <div class="credential-input">
-                            <div class="user-input-container"">
+                            <div class="user-input-container">
                                 <input class="card-user-input" type="text" placeholder="Enter your email">
                             </div>
                         </div>
@@ -146,7 +150,7 @@
                             <input class="checkbox" type="checkbox"></input>
                             <p>Remember me</p>
                         </div>
-                        <p class="forgot">Forgot password?</p>
+                        <a href="#" class="forgot">Forgot password?</a>
                     </div>
 
                     <div style="height:20px;"></div> <!-- horizontal space -->
@@ -166,7 +170,7 @@
 
                 <div style="height:20px;"></div> <!-- horizontal space -->
 
-                <div class="credential-input" style="cursor:pointer;">
+                <button class="credential-input" id="sign-in-ggl">
                     <div class="sign-in-google">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18.1712 8.36792H17.5V8.33333H9.99996V11.6667H14.7095C14.0225 13.6071 12.1762 15 9.99996 15C7.23871 15 4.99996 12.7613 4.99996 10C4.99996 7.23875 7.23871 5 9.99996 5C11.2745 5 12.4341 5.48083 13.317 6.26625L15.6741 3.90917C14.1858 2.52208 12.195 1.66667 9.99996 1.66667C5.39788 1.66667 1.66663 5.39792 1.66663 10C1.66663 14.6021 5.39788 18.3333 9.99996 18.3333C14.602 18.3333 18.3333 14.6021 18.3333 10C18.3333 9.44125 18.2758 8.89583 18.1712 8.36792Z" fill="#FFC107"/>
@@ -176,13 +180,13 @@
                         </svg>
                         <p>Sign in with Google</p>
                     </div>
-                </div>
+                </button>
 
                 <div style="height:20px;"></div> <!-- horizontal space -->
 
                 <div class="register-section">
                     <p>Don’t have an account?</p>
-                    <p class="forgot">Register</p>
+                    <a href="#" class="forgot">Register</a>
                 </div>
             </div>
         </container>
