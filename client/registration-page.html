@@ -105,7 +105,7 @@
                     <p>Please enter your details to continue</p>
                 </div>
 
-                <form action = "http://127.0.0.1:5000/registration" method = "POST">
+                <form id="registration-form" action = "http://127.0.0.1:5000/registration" method = "POST">
                     <div class="credential-container">
                         <p>Name</p>
                         <div class="input-container">
@@ -200,6 +200,14 @@
                 openCloseLock('.lock', '.lock-2', '.password');
                 openCloseLock('.lock-b', '.lock-2-b', '.password-b');
                 
+
+                document.getElementById('login-form').addEventListener('submit', function(event){
+                    const emailInput = document.getElementById('email').value.trim();
+                    const passwordInput = document.getElementById('password').value.trim();
+                    const emailErrorMessage = document.getElementById('invalid-email');  
+                    const passwordErrorMessage = document.getElementById('invalid-password');
+                    
+                });
             </script>
         </container>
     </body>

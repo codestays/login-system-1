@@ -123,6 +123,7 @@
                                 <input id="email" class="card-user-input" type="text" placeholder="Enter your email" name="email">
                             </div>
                         </div>
+                        <div style="height:5px;"></div> <!-- horizontal space -->
                         <p id="invalid-email" style="color:red;"></p>
                     </div>
 
@@ -143,6 +144,8 @@
                                 </svg>
                             </div>
                         </div>
+                        <div style="height:5px;"></div> <!-- horizontal space -->
+                        <p id="invalid-password" style="color:red;"></p>
                     </div>
 
                     <div style="height:20px;"></div> <!-- horizontal space -->
@@ -217,20 +220,30 @@
                     eyeIcon2.addEventListener('click', eyeFunction);
                 }
 
-                
-                document.getElementById('login-form').addEventListener('submit', function(event){
-                    event.preventDefault();
 
-                    const emailInput = document.getElementById('email').value;
-                    const errorMessage = document.getElementById('invalid-email');  
+                document.getElementById('login-form').addEventListener('submit', function(event){
+                    
+
+                    const emailInput = document.getElementById('email').value.trim();
+                    const emailErrorMessage = document.getElementById('invalid-email');  
+                    const passwordInput = document.getElementById('password').value.trim();
+                    const passwordErrorMessage = document.getElementById('invalid-password');  
 
                     const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
                     
-                    errorMessage.textContent = "Pl";
                     if (!pattern.test(emailInput)) {
-                        errorMessage.textContent = "Please enter a valid email address.";
+                        emailErrorMessage.textContent = "Please enter a valid email address.";
+                        event.preventDefault();
                     } else {
-                        errorMessage.textContent = "";
+                        emailErrorMessage.textContent = "";
+                    }
+
+                    if(passwordInput == ""){
+                        passwordErrorMessage.textContent = "Invalid password. Password can't be empty.";
+                        event.preventDefault();
+                    }
+                    else{
+                        passwordErrorMessage.textContent = "";
                     }
                 });
                 
