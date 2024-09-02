@@ -7,6 +7,7 @@
         <title>Login</title>
     </head>
 
+
     <style>
         *{
             margin:0; padding:0; font-family:Sans-Serif; text-decoration:none;
@@ -34,15 +35,18 @@
 
 
         .credential-input{
-            height:40px; width:100%; border:1px black solid; border-radius:10px; display:flex; align-items:center; justify-content:center; background-color:white;
+            height:40px; width:100%; border:1px #A0A0A0 solid; border-radius:10px; display:flex; align-items:center; justify-content:center; background-color:white;
+        }
+        .credential-input:hover{
+            border:1px #606060 solid;
         }
 
         .card-user-input{
-            height:90%; width:94%; outline:none; border:none;
+            height:100%; width:100%; outline:none; border:none; border-radius:10px; padding-left:10px;
         }
 
         .user-input-container{
-            height:90%; width:96%; display:flex; align-items:center;
+            height:100%; width:100%; display:flex; align-items:center;
         }
 
         .remember-forgot-container{
@@ -69,7 +73,7 @@
         }
 
         .line-1{
-            height:1px; width:155px; background-color:black;
+            height:1px; width:155px; background-color:#A0A0A0;
         }
 
         .sign-in-google{
@@ -110,15 +114,16 @@
                 
                 <div style="height:20px;"></div> <!-- horizontal space -->
 
-                <form>
+                <form id="login-form" action = "http://127.0.0.1:5000/login" method = "POST">
                     <div class="input-container">
                         <p>Email</p>
                         <div style="height:10px;"></div> <!-- horizontal space -->
                         <div class="credential-input">
                             <div class="user-input-container">
-                                <input class="card-user-input" type="text" placeholder="Enter your email">
+                                <input id="email" class="card-user-input" type="text" placeholder="Enter your email" name="email">
                             </div>
                         </div>
+                        <p id="invalid-email" style="color:red;"></p>
                     </div>
 
                     <div style="height:20px;"></div> <!-- horizontal space -->
@@ -128,17 +133,14 @@
                         <div style="height:10px;"></div> <!-- horizontal space -->
                         <div class="credential-input">
                             <div class="user-input-container">
-                                <input class="card-user-input" type="password" placeholder="Enter your password">
-                                <svg class="eye" style="cursor:pointer;" width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10.0349 3.03169C8.39404 3.03169 7.06494 4.36079 7.06494 6.00164C7.06494 7.6425 8.39404 8.9716 10.0349 8.9716C11.6758 8.9716 13.0048 7.6425 13.0048 6.00164C13.0007 4.36079 11.6716 3.03169 10.0349 3.03169ZM10.0349 5.03354C9.50161 5.03354 9.06679 5.46837 9.06679 6.00164C9.06679 6.24777 8.86988 6.44468 8.62376 6.44468C8.37763 6.44468 8.18072 6.24777 8.18072 6.00164C8.18072 4.98021 9.01346 4.14748 10.0349 4.14748C10.281 4.14748 10.4779 4.34438 10.4779 4.59051C10.4779 4.83664 10.2769 5.03354 10.0349 5.03354Z" fill="black" fill-opacity="0.5"/>
-                                    <path d="M19.7447 5.333C10.523 -5.27515 2.18748 3.12194 0.202042 5.44786C-0.0645969 5.75962 -0.0686991 6.21906 0.19794 6.53082C9.3006 17.1554 17.5664 9.18081 19.7447 6.6826C20.0851 6.297 20.0851 5.7227 19.7447 5.333ZM10.0349 10.2186C7.70486 10.2186 5.81788 8.33166 5.81788 6.00164C5.81788 3.67163 7.70486 1.78464 10.0349 1.78464C12.3649 1.78464 14.2519 3.67163 14.2519 6.00164C14.2519 8.33166 12.3608 10.2186 10.0349 10.2186Z" fill="black" fill-opacity="0.5"/>
+                                <input id="password" class="card-user-input" type="password" placeholder="Enter your password" name="password">
+                                <svg class="eye" style="cursor:pointer; margin-right:10px;" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11 4C10.4477 4 10 4.44772 10 5V8H15.0658C15.9523 7.99995 16.7161 7.99991 17.3278 8.08215C17.9833 8.17028 18.6117 8.36902 19.1213 8.87868C19.631 9.38835 19.8297 10.0167 19.9179 10.6722C20.0001 11.2839 20.0001 12.0477 20 12.9342V17.0658C20.0001 17.9523 20.0001 18.7161 19.9179 19.3278C19.8297 19.9833 19.631 20.6117 19.1213 21.1213C18.6117 21.631 17.9833 21.8297 17.3278 21.9179C16.7161 22.0001 15.9523 22.0001 15.0658 22H8.93414C8.04767 22.0001 7.28387 22.0001 6.67222 21.9179C6.0167 21.8297 5.38835 21.631 4.87869 21.1213C4.36902 20.6117 4.17028 19.9833 4.08215 19.3278C3.99991 18.7161 3.99995 17.9523 4 17.0658V12.9342C3.99995 12.0477 3.99991 11.2839 4.08215 10.6722C4.17028 10.0167 4.36902 9.38835 4.87869 8.87868C5.38835 8.36902 6.0167 8.17028 6.67222 8.08214C7.05704 8.03041 7.50208 8.01124 8.00001 8.00415V5C8.00001 3.34315 9.34316 2 11 2H13.0625C14.6848 2 16 3.31516 16 4.9375V5C16 5.55228 15.5523 6 15 6C14.4477 6 14 5.55228 14 5V4.9375C14 4.41973 13.5803 4 13.0625 4H11ZM12 13C10.8954 13 10 13.8954 10 15C10 16.1046 10.8954 17 12 17C13.1046 17 14 16.1046 14 15C14 13.8954 13.1046 13 12 13Z" fill="#323232"/>
                                 </svg>
 
-                                <svg class="eye-2" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9.92188 12.1875C10.502 12.1875 11.0584 11.957 11.4687 11.5468C11.8789 11.1366 12.1094 10.5802 12.1094 10C12.1094 9.93594 12.1065 9.87246 12.101 9.80977L9.73165 12.1791C9.79434 12.1846 9.85762 12.1875 9.92188 12.1875ZM17.1625 3.23359L16.3281 2.4C16.2988 2.37072 16.2591 2.35427 16.2177 2.35427C16.1763 2.35427 16.1365 2.37072 16.1072 2.4L13.9721 4.53574C12.7942 3.93379 11.4702 3.63281 10 3.63281C6.2461 3.63281 3.44532 5.58789 1.59766 9.49805C1.5234 9.65531 1.48488 9.82706 1.48488 10.001C1.48488 10.1749 1.5234 10.3466 1.59766 10.5039C2.33594 12.059 3.22494 13.3054 4.26465 14.2432L2.19844 16.3086C2.16916 16.3379 2.15272 16.3776 2.15272 16.419C2.15272 16.4605 2.16916 16.5002 2.19844 16.5295L3.03223 17.3633C3.06153 17.3926 3.10126 17.409 3.14268 17.409C3.1841 17.409 3.22383 17.3926 3.25313 17.3633L17.1625 3.45469C17.177 3.44018 17.1886 3.42294 17.1964 3.40397C17.2043 3.38501 17.2083 3.36467 17.2083 3.34414C17.2083 3.32361 17.2043 3.30327 17.1964 3.28431C17.1886 3.26534 17.177 3.2481 17.1625 3.23359ZM6.48438 10C6.48433 9.40626 6.63806 8.82263 6.93061 8.30597C7.22315 7.7893 7.64454 7.35722 8.1537 7.05181C8.66287 6.74641 9.24246 6.57809 9.83602 6.56326C10.4296 6.54843 11.0168 6.68759 11.5406 6.96719L10.591 7.9168C10.2081 7.79417 9.79871 7.7794 9.4079 7.87411C9.01709 7.96882 8.65992 8.16935 8.37557 8.45369C8.09123 8.73803 7.8907 9.09521 7.79599 9.48602C7.70128 9.87683 7.71605 10.2862 7.83868 10.6691L6.88907 11.6187C6.62258 11.1209 6.48355 10.5647 6.48438 10Z" fill="black" fill-opacity="0.5"/>
-                                    <path d="M18.4023 9.49609C17.7148 8.04818 16.8965 6.86751 15.9475 5.9541L13.1322 8.76953C13.3695 9.38987 13.4221 10.0657 13.2837 10.7152C13.1452 11.3648 12.8216 11.9604 12.352 12.4301C11.8823 12.8997 11.2867 13.2233 10.6371 13.3618C9.98753 13.5003 9.31174 13.4477 8.6914 13.2104L6.30351 15.5982C7.41133 16.1109 8.64349 16.3672 10 16.3672C13.7539 16.3672 16.5547 14.4121 18.4023 10.502C18.4766 10.3447 18.5151 10.1729 18.5151 9.99902C18.5151 9.82511 18.4766 9.65335 18.4023 9.49609Z" fill="black" fill-opacity="0.5"/>
+                                <svg class="eye-2" style="cursor:pointer; margin-right:10px;" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.00001 5V8.00415C7.50208 8.01124 7.05704 8.03041 6.67222 8.08214C6.0167 8.17028 5.38835 8.36902 4.87869 8.87868C4.36902 9.38835 4.17028 10.0167 4.08215 10.6722C3.99991 11.2839 3.99995 12.0477 4 12.9342V17.0658C3.99995 17.9523 3.99991 18.7161 4.08215 19.3278C4.17028 19.9833 4.36902 20.6117 4.87869 21.1213C5.38835 21.631 6.0167 21.8297 6.67222 21.9179C7.28387 22.0001 8.0477 22.0001 8.93417 22H15.0659C15.9523 22.0001 16.7161 22.0001 17.3278 21.9179C17.9833 21.8297 18.6117 21.631 19.1213 21.1213C19.631 20.6117 19.8297 19.9833 19.9179 19.3278C20.0001 18.7161 20.0001 17.9523 20 17.0658V12.9342C20.0001 12.0477 20.0001 11.2839 19.9179 10.6722C19.8297 10.0167 19.631 9.38835 19.1213 8.87868C18.6117 8.36902 17.9833 8.17028 17.3278 8.08215C16.943 8.03041 16.4979 8.01124 16 8.00415V5C16 3.34315 14.6569 2 13 2H11C9.34316 2 8.00001 3.34315 8.00001 5ZM11 4C10.4477 4 10 4.44772 10 5V8L14 8V5C14 4.44772 13.5523 4 13 4H11ZM12 13C10.8954 13 10 13.8954 10 15C10 16.1046 10.8954 17 12 17C13.1046 17 14 16.1046 14 15C14 13.8954 13.1046 13 12 13Z" fill="#323232"/>
                                 </svg>
-                                    
                             </div>
                         </div>
                     </div>
@@ -150,12 +152,12 @@
                             <input class="checkbox" type="checkbox"></input>
                             <p>Remember me</p>
                         </div>
-                        <a href="#" class="forgot">Forgot password?</a>
+                        <a href="http://127.0.0.1:5000/forgot-password" class="forgot">Forgot password?</a>
                     </div>
 
                     <div style="height:20px;"></div> <!-- horizontal space -->
 
-                    <button class="login-button">
+                    <button type="submit" class="login-button">
                         <p>Log in</p>
                     </button>
                 </form>
@@ -186,24 +188,52 @@
 
                 <div class="register-section">
                     <p>Don’t have an account?</p>
-                    <a href="#" class="forgot">Register</a>
+                    <a href="./registration-page.html" class="forgot">Register</a>
                 </div>
             </div>
         </container>
 
         <script>
-            const eyeIcon = document.querySelector('.eye');
+                const eyeIcon = document.querySelector('.eye');
                 const eyeIcon2 = document.querySelector('.eye-2');
+                const passwordInput = document.getElementById('password');
         
                 if (eyeIcon){
+                    var open = false;
                     function eyeFunction() {
                         eyeIcon.classList.toggle('active');
                         eyeIcon2.classList.toggle('activate');
+
+                        open = !open;
+                        if(open){
+                            passwordInput.type = 'text';
+                        }
+                        else{
+                            passwordInput.type = 'password';
+                        }
                     }
         
                     eyeIcon.addEventListener('click', eyeFunction);
                     eyeIcon2.addEventListener('click', eyeFunction);
                 }
+
+                
+                document.getElementById('login-form').addEventListener('submit', function(event){
+                    event.preventDefault();
+
+                    const emailInput = document.getElementById('email').value;
+                    const errorMessage = document.getElementById('invalid-email');  
+
+                    const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+                    
+                    errorMessage.textContent = "Pl";
+                    if (!pattern.test(emailInput)) {
+                        errorMessage.textContent = "Please enter a valid email address.";
+                    } else {
+                        errorMessage.textContent = "";
+                    }
+                });
+                
         </script>
         
     </body>
