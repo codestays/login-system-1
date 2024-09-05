@@ -245,6 +245,11 @@
                     else{
                         passwordErrorMessage.textContent = "";
                     }
+
+                    if(retypePasswordInput != passwordInput){
+                        retypePasswordErrorMessage.textContent = "password doesn't match";
+                        event.preventDefault();
+                    }
                 });
                 
         </script>

@@ -247,6 +247,7 @@
                     }
                     else{emailErrorMessage.textContent = "";}
 
+                    
                     if(passwordInput == ""){
                         passwordErrorMessage.textContent = "Password can't be empty";
                         event.preventDefault();
@@ -257,7 +258,13 @@
                         retypePasswordErrorMessage.textContent = "Password can't be empty";
                         event.preventDefault();
                     }
-                    else{retypePasswordErrorMessage.textContent = "";}
+                    else{retypePasswordErrorMessage.textContent = "";} 
+                    
+                    
+                    if(retypePasswordInput != passwordInput){
+                        retypePasswordErrorMessage.textContent = "password doesn't match";
+                        event.preventDefault();
+                    }
                 });
             </script>
         </container>
