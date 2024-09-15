@@ -6,18 +6,28 @@ app = Flask(__name__, template_folder='../client')
 CORS(app)
 
 
+database = {
+    "admin":12345,
+    "ematshabe023@student.wethinkcode.co.za":"12345"
+}
+
+
+@app.route("/")
+def root():
+    return render_template("login-page.html")
+
+
 @app.route("/home")
 def home():
     return render_template("home.html")
 
-database = {
-    "admin":12345,
-    "ematshabe023@student.wethinkcode.co.za":"12345"
-    }
 
-
-@app.route("/login-form", methods=["POST", "OPTIONS"])
+@app.route("/login")
 def login():
+    return render_template("login-page.html")
+
+@app.route("/login-form", methods=["POST"])
+def loginForm():
     requestData = request.get_data().decode('utf8').replace("'", '"')
     
     if request.method == "POST":
@@ -28,17 +38,30 @@ def login():
             else:
                 return jsonify({"message":"login failed", "status":"error"})
         else:
-            return jsonify({"message":"login failed", "status":"error"})
+            return jsonify({"message":"email doesn't exist", "status":"error"})
 
     return jsonify({"response": "done"})
-    
 
-@app.route("/registration", methods=["POST"])
+
+@app.route("/registration", methods=["GET"])
 def registration():
-    formData = request.form
+    return render_template("registration-page.html")
+
+
+@app.route("/registration-form", methods=["POST"])
+def registrationForm():
+    
     if request.method == "POST":
-        print(formData)
-    return "registration page process"
+        requestData = request.get_data().decode('utf8').replace("'", '"') 
+        print(requestData)
+        # requestData = json.loads(requestData)
+        # if requestData["email"] not in database: 
+        #     jsonify({"message":"Registration complete", "status":"successful"})
+        # else:
+        #     return jsonify({"message":"User already exist", "status":"error"})
+        return jsonify({"response": "done"})
+
+    return jsonify({"response": "done"})
 
 
 @app.route("/logout", methods=["GET"])

@@ -114,7 +114,9 @@
                 
                 <div style="height:20px;"></div> <!-- horizontal space -->
 
-                <!-- action='http://127.0.0.1:5000/login' -->
+                
+
+                <p id="invalid" style="color:red; font-size:13px; margin-bottom:8px;"></p>
                 <form id="login-form" action='' method = "POST">
                     <div class="input-container">
                         <p>Email</p>
@@ -192,10 +194,11 @@
 
                 <div class="register-section">
                     <p>Don’t have an account?</p>
-                    <a href="./registration-page.html" class="forgot">Register</a>
+                    <a href="http://127.0.0.1:5000/registration" class="forgot">Register</a>
                 </div>
             </div>
         </container>
+
 
         <script>
             const eyeIcon = document.querySelector('.eye');
@@ -251,8 +254,6 @@
                 }
 
                 if(validEmail & validPass){
-                    let form = new FormData();
-                    form.append("data", "1234");
                     const response = await fetch('http://127.0.0.1:5000/login-form', {
                         method: 'POST',
                         body:JSON.stringify({
@@ -267,11 +268,11 @@
                     .then(response => response.json())
                     .then(data => {
                         if(data.status == "successful"){
-                            alert(""+data.message);
-                            window.location.replace("http://127.0.0.1:5000/home");
+                            window.location.assign("http://127.0.0.1:5000/home");
                         }
                         else{
-                            alert(""+data.message);
+                            const invalidSubmit = document.getElementById("invalid")
+                            invalidSubmit.textContent = "Incorrect password for " + emailInput;
                         }
                     })                
                 }

@@ -109,7 +109,7 @@
                     <p>Please enter your details to continue</p>
                 </div>
 
-                <form id="registration-form" action = "http://127.0.0.1:5000/registration" method = "POST">
+                <form id="registration-form" action = "" method = "POST">
                     <div class="credential-container">
                         <p>Name</p>
                         <div class="input-container">
@@ -210,7 +210,7 @@
                 openCloseLock('.lock-b', '.lock-2-b', '.password-b');
                 
 
-                document.getElementById('registration-form').addEventListener('submit', function(event){
+                document.getElementById('register').addEventListener('click', async function(event){
                     const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
                     const nameInput = document.getElementById('name').value.trim();
@@ -225,46 +225,98 @@
                     const passwordErrorMessage = document.getElementById('invalid-password');
                     const retypePasswordErrorMessage = document.getElementById('invalid-retype-password');  
 
+                    let validEmail = false;
+                    let validPass = false;
+                    let validName = false;
+                    let validSurname = false;
+
                     if(nameInput == ""){
                         nameErrorMessage.textContent = "Name can't be empty";
+                        validName = false;
                         event.preventDefault();
                     }
-                    else{nameErrorMessage.textContent = "";}
+                    else{nameErrorMessage.textContent = "";
+                        validName = true;
+                    }
 
                     if(surnameInput == ""){
                         surnameErrorMessage.textContent = "Surname can't be empty";
+                        validSurname = false;
                         event.preventDefault();
                     }
-                    else{surnameErrorMessage.textContent = "";}
+                    else{
+                        surnameErrorMessage.textContent = "";
+                        validSurname = true;
+                    }
 
                     if(emailInput == ""){
                         emailErrorMessage.textContent = "Email can't be empty";
+                        validEmail = false;
                         event.preventDefault();
                     }
                     if(!pattern.test(emailInput)){
                         emailErrorMessage.textContent = "Invalid email";
+                        validEmail = false;
                         event.preventDefault();
                     }
-                    else{emailErrorMessage.textContent = "";}
+                    else{
+                        emailErrorMessage.textContent = "";
+                        validEmail = true;
+                    }
 
                     
                     if(passwordInput == ""){
                         passwordErrorMessage.textContent = "Password can't be empty";
+                        validPass = false;
                         event.preventDefault();
                     }
-                    else{passwordErrorMessage.textContent = "";}
+                    else{
+                        passwordErrorMessage.textContent = "";
+                        validPass = true;
+                    }
 
                     if(retypePasswordInput == ""){
                         retypePasswordErrorMessage.textContent = "Password can't be empty";
+                        validPass = true;
                         event.preventDefault();
                     }
-                    else{retypePasswordErrorMessage.textContent = "";} 
-                    
+                    else{
+                        retypePasswordErrorMessage.textContent = "";
+                        validPass = true;
+                    } 
                     
                     if(retypePasswordInput != passwordInput){
                         retypePasswordErrorMessage.textContent = "password doesn't match";
+                        validPass = true;
                         event.preventDefault();
                     }
+
+
+
+                    if(validPass && validEmail && validSurname && validName){
+                        const response = await fetch('http://127.0.0.1:5000/registration-form', {
+                            method: 'POST',
+                            body:JSON.stringify({
+                                email: emailInput,
+                                password: passwordInput
+                            }),
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        // .then(response => response.json())
+                        // .then(data => {
+                        //     if(data.status == "successful"){
+                        //         window.location.href = ("login-form");
+                        //     }
+                        //     else{
+                        //         const invalidSubmit = document.getElementById("invalid")
+                        //         invalidSubmit.textContent = "Incorrect password for " + emailInput;
+                        //     }
+                        // })  
+                    }
+                         
                 });
             </script>
         </container>
