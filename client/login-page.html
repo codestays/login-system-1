@@ -38,7 +38,7 @@
             height:40px; width:100%; border:1px #A0A0A0 solid; border-radius:10px; display:flex; align-items:center; justify-content:center; background-color:white;
         }
         .credential-input:hover{
-            border:1px #606060 solid;
+            border:1px #0072DD solid;
         }
 
         .card-user-input{
@@ -62,10 +62,10 @@
         }
 
         .login-button{
-            width:100%; height:40px; outline:none; border:none; border-radius:10px; color:white; background-color:#0072DD; cursor:pointer; transition:transform 0.2s ease;
+            width:100%; height:40px; outline:none; border:none; border-radius:10px; color:white; background-color:#0F172A; cursor:pointer; transition:transform 0.2s ease;
         }
         .login-button:hover{
-            background-color:#007ef4
+            background-color:#19243d;
         }
 
         .or-section{
@@ -114,7 +114,8 @@
                 
                 <div style="height:20px;"></div> <!-- horizontal space -->
 
-                <form id="login-form" action = "http://127.0.0.1:5000/login" method = "POST">
+                <!-- action='http://127.0.0.1:5000/login' -->
+                <form id="login-form" action='' method = "POST">
                     <div class="input-container">
                         <p>Email</p>
                         <div style="height:10px;"></div> <!-- horizontal space -->
@@ -160,7 +161,7 @@
 
                     <div style="height:20px;"></div> <!-- horizontal space -->
 
-                    <button type="submit" class="login-button">
+                    <button type="button" class="login-button" id="post-btn">
                         <p>Log in</p>
                     </button>
                 </form>
@@ -197,61 +198,84 @@
         </container>
 
         <script>
-                const eyeIcon = document.querySelector('.eye');
-                const eyeIcon2 = document.querySelector('.eye-2');
-                const passwordInput = document.getElementById('password');
-        
-                if (eyeIcon){
-                    var open = false;
-                    function eyeFunction() {
-                        eyeIcon.classList.toggle('active');
-                        eyeIcon2.classList.toggle('activate');
+            const eyeIcon = document.querySelector('.eye');
+            const eyeIcon2 = document.querySelector('.eye-2');
+            const passwordInput = document.getElementById('password');
 
-                        open = !open;
-                        if(open){
-                            passwordInput.type = 'text';
-                        }
-                        else{
-                            passwordInput.type = 'password';
-                        }
-                    }
-        
-                    eyeIcon.addEventListener('click', eyeFunction);
-                    eyeIcon2.addEventListener('click', eyeFunction);
-                }
+            if (eyeIcon){
+                var open = false;
+                function eyeFunction() {
+                    eyeIcon.classList.toggle('active');
+                    eyeIcon2.classList.toggle('activate');
 
-
-                document.getElementById('login-form').addEventListener('submit', function(event){
-                    
-
-                    const emailInput = document.getElementById('email').value.trim();
-                    const emailErrorMessage = document.getElementById('invalid-email');  
-                    const passwordInput = document.getElementById('password').value.trim();
-                    const passwordErrorMessage = document.getElementById('invalid-password');  
-
-                    const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-                    
-                    if (!pattern.test(emailInput)) {
-                        emailErrorMessage.textContent = "Please enter a valid email address.";
-                        event.preventDefault();
-                    } else {
-                        emailErrorMessage.textContent = "";
-                    }
-
-                    if(passwordInput == ""){
-                        passwordErrorMessage.textContent = "Invalid password. Password can't be empty.";
-                        event.preventDefault();
+                    open = !open;
+                    if(open){
+                        passwordInput.type = 'text';
                     }
                     else{
-                        passwordErrorMessage.textContent = "";
+                        passwordInput.type = 'password';
                     }
+                }
+    
+                eyeIcon.addEventListener('click', eyeFunction);
+                eyeIcon2.addEventListener('click', eyeFunction);
+            }
 
-                    if(retypePasswordInput != passwordInput){
-                        retypePasswordErrorMessage.textContent = "password doesn't match";
-                        event.preventDefault();
-                    }
-                });
-                
+
+            document.getElementById("post-btn").addEventListener("click", async function(event){
+                const emailInput = document.getElementById('email').value.trim();
+                const passwordInput = document.getElementById('password').value.trim();
+                const emailErrorMessage = document.getElementById('invalid-email');  
+                const passwordErrorMessage = document.getElementById('invalid-password'); 
+                const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; 
+
+                let validEmail = false;
+                let validPass = false;
+
+                if (!pattern.test(emailInput)) {
+                    emailErrorMessage.textContent = "Please enter a valid email address.";
+                    event.preventDefault();
+                } 
+                else{
+                    emailErrorMessage.textContent = "";
+                    validEmail = true;
+                }
+
+                if(passwordInput == ""){
+                    passwordErrorMessage.textContent = "Invalid password. Password can't be empty.";
+                    event.preventDefault();
+                }
+                else{
+                    passwordErrorMessage.textContent = ""; 
+                    validPass = true; 
+                }
+
+                if(validEmail & validPass){
+                    let form = new FormData();
+                    form.append("data", "1234");
+                    const response = await fetch('http://127.0.0.1:5000/login-form', {
+                        method: 'POST',
+                        body:JSON.stringify({
+                            email: emailInput,
+                            password: passwordInput
+                        }),
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if(data.status == "successful"){
+                            alert(""+data.message);
+                            window.location.replace("http://127.0.0.1:5000/home");
+                        }
+                        else{
+                            alert(""+data.message);
+                        }
+                    })                
+                }
+            });
         </script>
         
     </body>
