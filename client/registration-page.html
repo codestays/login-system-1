@@ -99,9 +99,32 @@
         .invalid-text{
             color:red; margin-top:-5px; font-size:13px;
         }
+
+        .nav-btn{
+            height:36px; color:white; padding-left:14px; padding-right:14px; border-radius:20px; display:flex; justify-content:center; align-items:center; background-color:#0F172A;
+        }
+
+        .nav-btn:hover{
+            background-color:#19243d;
+        }
     </style>
 
     <body>
+        <div class="navbar" style="height:60px; position:fixed; display:flex; justify-content:center; align-items:center;"></div>
+            <div style="width:90%; height:70%; padding-top: 16px; margin:auto; display:flex; align-items:center; justify-content:space-between;">
+                <div>
+                    <p style="font-weight:700; font-size:16px;">Ernest</p>
+                </div>
+                <div>
+                    <a href="/login">
+                        <div class="nav-btn">
+                            <p style="font-size:14px;">Login</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <container class="main-container">
             <div class="registration-card" >
                 <div class="card-header">

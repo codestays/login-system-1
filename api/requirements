@@ -1,2 +1,3 @@
 Flask
 flask-cors
+authlib.integrations.flask_client

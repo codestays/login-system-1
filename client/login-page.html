@@ -102,9 +102,32 @@
             display: none;
         }
 
+        .nav-btn{
+            height:36px; color:white; padding-left:14px; padding-right:14px; border-radius:20px; display:flex; justify-content:center; align-items:center; background-color:#0F172A;
+        }
+
+        .nav-btn:hover{
+            background-color:#19243d;
+        }
+
     </style>
 
     <body>
+        <div class="navbar" style="height:60px; position:fixed; display:flex; justify-content:center; align-items:center;"></div>
+            <div style="width:90%; height:70%; padding-top: 16px; margin:auto; display:flex; align-items:center; justify-content:space-between;">
+                <div>
+                    <p style="font-weight:700; font-size:16px;">Ernest</p>
+                </div>
+                <div>
+                    <a href="/registration">
+                        <div class="nav-btn">
+                            <p style="font-size:14px;">Registration</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <container class="card-main-container">
             <div class="login-card">
                 <div class="card-header">
@@ -113,8 +136,6 @@
                 </div>
                 
                 <div style="height:20px;"></div> <!-- horizontal space -->
-
-                
 
                 <p id="invalid" style="color:red; font-size:13px; margin-bottom:8px;"></p>
                 <form id="login-form" action='' method = "POST">
@@ -178,7 +199,8 @@
 
                 <div style="height:20px;"></div> <!-- horizontal space -->
 
-                <button class="credential-input" id="sign-in-ggl">
+                <a href="login-google">
+                <button type="button" class="credential-input" id="sign-in-ggl">
                     <div class="sign-in-google">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18.1712 8.36792H17.5V8.33333H9.99996V11.6667H14.7095C14.0225 13.6071 12.1762 15 9.99996 15C7.23871 15 4.99996 12.7613 4.99996 10C4.99996 7.23875 7.23871 5 9.99996 5C11.2745 5 12.4341 5.48083 13.317 6.26625L15.6741 3.90917C14.1858 2.52208 12.195 1.66667 9.99996 1.66667C5.39788 1.66667 1.66663 5.39792 1.66663 10C1.66663 14.6021 5.39788 18.3333 9.99996 18.3333C14.602 18.3333 18.3333 14.6021 18.3333 10C18.3333 9.44125 18.2758 8.89583 18.1712 8.36792Z" fill="#FFC107"/>
@@ -189,6 +211,7 @@
                         <p>Sign in with Google</p>
                     </div>
                 </button>
+                </a>
 
                 <div style="height:20px;"></div> <!-- horizontal space -->
 
