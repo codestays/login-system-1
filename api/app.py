@@ -1,9 +1,12 @@
 from flask import Flask, jsonify, request, url_for, session, render_template, redirect
 from flask_cors import CORS
 from authlib.integrations.flask_client import OAuth
+from database import init_db
 import json
 import os
 import config
+import sqlite3
+
 
 app = Flask(__name__, template_folder='../client')
 CORS(app)
@@ -50,6 +53,7 @@ def gAuthForm():
     session['name'] = token
     email = token["userinfo"]["email"]
 
+    
     if email not in db:
         form = {
             "name": token["userinfo"]["given_name"],
@@ -72,16 +76,25 @@ def loginForm():
     
     if request.method == "POST":
         requestData = json.loads(requestData)
-        if requestData["email"] in db: 
-            if requestData["password"] == db[requestData["email"]]["password"]:
-                session["name"] = requestData["email"]
-                return jsonify({"message":"you're in", "status":"successful"})
-            else:
-                return jsonify({"message":"login failed", "status":"error"})
-        else:
-            return jsonify({"message":"email doesn't exist", "status":"error"})
+        email = requestData["email"]
+        password = requestData["password"]
 
-    return jsonify({"message":"none", "status":"error"})
+        conn = sqlite3.connect('login.db')
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT password FROM users WHERE email = ?", (email,))
+        user = cursor.fetchone()
+
+        if user:
+            if password == user[0]:
+                session["name"] = email
+                return jsonify({"message": "you're in", "status": "successful"})
+            else:
+                return jsonify({"message": "login failed", "status": "error"})
+        else:
+            return jsonify({"message": "email doesn't exist", "status": "error"})
+
+    return jsonify({"message": "none", "status": "error"})
 
 
 @app.route("/registration", methods=["GET"])
@@ -95,11 +108,26 @@ def registrationForm():
         requestData = request.get_data().decode('utf8').replace("'", '"') 
         requestData = json.loads(requestData)
 
-        if requestData["email"] not in db:
-            db[requestData["email"]] = requestData
-            return jsonify({"message":"registration complete", "status":"successful"})
+        email = requestData["email"]
+        name = requestData["name"]
+        surname = requestData["surname"]
+        password = requestData["password"]
+        
+        conn = sqlite3.connect('login.db')
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+        existing_user = cursor.fetchone()
+
+        if existing_user:
+            return jsonify({"message": "user already exists", "status": "error"})
         else:
-            return jsonify({"message":"user already exist", "status":"error"})        
+            # Insert new user
+            cursor.execute("INSERT INTO users (name, surname, email, password) VALUES (?, ?, ?, ?)",
+                      (name, surname, email, password))
+            conn.commit()
+            conn.close()
+            return jsonify({"message": "registration complete", "status": "successful"})        
 
     return jsonify({"message":"none", "status":"error"})
 
@@ -115,4 +143,5 @@ def forgotPassword():
 
 
 if __name__ == '__main__':  
+    init_db()
     app.run()  
