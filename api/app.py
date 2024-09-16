@@ -52,16 +52,24 @@ def gAuthForm():
     token = google.authorize_access_token()
     session['name'] = token
     email = token["userinfo"]["email"]
+    name = token["userinfo"]["given_name"]
+    surname = token["userinfo"]["family_name"]
+    password = token["access_token"]
 
+    conn = sqlite3.connect('login.db')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+    existing_user = cursor.fetchone()
     
-    if email not in db:
-        form = {
-            "name": token["userinfo"]["given_name"],
-            "surname": token["userinfo"]["family_name"],
-            "email": email,
-            "password": token["access_token"]
-        }
-        db[email] = form
+    if not existing_user:
+        cursor.execute("INSERT INTO users (name, surname, email, password) VALUES (?, ?, ?, ?)",
+                    (name, surname, email, password))
+        conn.commit()
+        conn.close()
+    
+    session["name"] = email
+
     return redirect(url_for('home'))
 
 
