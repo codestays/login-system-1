@@ -228,8 +228,8 @@
             document.getElementById("post-btn").addEventListener("click", async function(event){
                 const emailInput = document.getElementById('email').value.trim();
                 const passwordInput = document.getElementById('password').value.trim();
-                const emailErrorMessage = document.getElementById('invalid-email');  
-                const passwordErrorMessage = document.getElementById('invalid-password'); 
+                let emailErrorMessage = document.getElementById('invalid-email');  
+                let passwordErrorMessage = document.getElementById('invalid-password'); 
                 const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; 
 
                 let validEmail = false;
@@ -272,7 +272,7 @@
                         }
                         else{
                             const invalidSubmit = document.getElementById("invalid")
-                            invalidSubmit.textContent = "Incorrect password for " + emailInput;
+                            invalidSubmit.textContent = "Incorrect password or email. Check credentials or register.";
                         }
                     })                
                 }
