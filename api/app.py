@@ -8,7 +8,7 @@ import config
 import sqlite3
 
 
-app = Flask(__name__, template_folder='../client')
+app = Flask(__name__, template_folder='../client', static_folder='../client/static')
 CORS(app)
 
 app.secret_key = os.urandom(20)
@@ -29,12 +29,9 @@ google = oauth.register(
 )
 
 
-db = {}
-
-
 @app.route("/")
 def root():
-    return render_template("login-page.html")
+    return render_template("landing.html")
 
 
 @app.route("/home")

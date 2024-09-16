@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome</title>
+    </head>
+
+    <style>
+        *{
+            margin:0; padding:0; font-family:Sans-Serif; text-decoration:none;
+        }
+
+        .nav-btn{
+            height:36px; color:white; padding-left:14px; padding-right:14px; border-radius:20px; display:flex; justify-content:center; align-items:center; background-color:#0F172A;
+        }
+
+        .nav-btn:hover{
+            background-color:#19243d;
+        }
+
+        #login-button{
+            color:#0F172A; background-color: white;
+        }
+    </style>
+
+    <body>
+        <div class="navbar" style="height:60px; position:fixed; display:flex; justify-content:center; align-items:center;"></div>
+            <div style="width:90%; height:70%; padding-top: 16px; margin:auto; display:flex; align-items:center; justify-content:space-between;">
+                <div>
+                    <p style="font-weight:700; font-size:16px;">Ernest</p>
+                </div>
+                <div class="nav-left" style="display:flex; gap:14px;">
+                    <a href="/login">
+                        <div class="nav-btn" id="login-button">
+                            <p style="font-size:14px;">Login</p>
+                        </div>
+                    </a>
+
+                    <a href="/registration">
+                        <div class="nav-btn">
+                            <p style="font-size:14px;">Registration</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div style="height:50vh; display:flex; align-items:center;">
+            <div style="width:60%; margin:auto; display:flex; justify-content:center;">
+                <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; gap:10px">
+                    <video autoplay loop muted src="./static/hi.mp4" width="60" height="60"></video>
+                    <p>Hi there! Welcome to my login system. Please login or register to continue.</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
