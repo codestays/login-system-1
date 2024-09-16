@@ -3,6 +3,7 @@ from flask_cors import CORS
 from authlib.integrations.flask_client import OAuth
 import json
 import os
+import config
 
 app = Flask(__name__, template_folder='../client')
 CORS(app)
@@ -12,8 +13,8 @@ oauth = OAuth(app)
 oauth.init_app(app)
 google = oauth.register(
     name='login1',
-    client_id='154338881871-h2b3b3f9cnd16k35gpqqtmssk3umptb0.apps.googleusercontent.com',
-    client_secret='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',
+    client_id=config.client_id,
+    client_secret=config.client_secret,
     access_token_url='https://oauth2.googleapis.com/token',
     authorize_url='https://accounts.google.com/o/oauth2/auth',
     server_metadata_url="https://accounts.google.com/.well-known/openid-configuration",
