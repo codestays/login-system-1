@@ -142,9 +142,9 @@ def logout():
     return redirect(url_for("/"))
 
 
-@app.route("/forgot-password", methods=["POST"])
+@app.route("/forgot-password", methods=["GET"])
 def forgotPassword():
-    return "forgot password process"
+    return render_template("forgot-password.html")
 
 
 if __name__ == '__main__':  
