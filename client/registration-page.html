@@ -326,7 +326,7 @@
                         event.preventDefault();
                     }
 
-                    if(validPass && validEmail && validSurname && validName){
+                    if(validPass && validEmail && validSurname && validName && validRetypePass){
                         const response = await fetch('http://127.0.0.1:5000/registration-form', {
                             method: 'POST',
                             body:JSON.stringify({
