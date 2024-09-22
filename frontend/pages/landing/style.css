@@ -2,6 +2,7 @@
     --black: #0F172A;
     --white: #ffffff;
     --main_center_width: 50px;  
+    --black_hover: #19243d;
 }
 
 
@@ -10,7 +11,7 @@
     padding:0; 
     font-family:Sans-Serif; 
     text-decoration:none;
-    font-size:14px;
+    font-size:16px;
 }
 
 .navbar{
@@ -69,6 +70,10 @@
     border-radius: 20px;
     background-color: var(--black);
     color: var(--white);
+}
+
+.reg-btn:hover{
+    background-color: var(--black_hover);
 }
 
 #login-button{
