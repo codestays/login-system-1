@@ -3,12 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login system</title>
-        <link rel="stylesheet" href="./style.css">
+        <title>OTP</title>
+        <link rel="stylesheet" href={{ url_for('static', filename='css/otp.css') }}>
     </head>
-    
     <body>
-        <div style="height:10px;"></div>
         <div class="navbar">
             <div class="nav-item-container">
                 <div class="nav-left">
@@ -28,7 +26,6 @@
                                 <p>Login</p>
                             </div>
                         </a>
-
                         <a href="/registration">
                             <div class="reg-btn">
                                 <p>Registration</p>
@@ -40,13 +37,37 @@
         </div>
 
         <div class="nav-space"></div>
+        <div id="space-a"></div>
 
-        <main class="main-section">
-            <div class="main-container">
-                <video autoplay loop muted src="../../media/hi.mp4" width="60" height="60"></video>
-                <p>Hi there! Welcome to my login system. Please login or register to continue.</p>
+        <div class="main-container">
+            <div class="login-card" >
+                <div class="card-header">
+                    <h1>Verification code</h1>
+                    <p>Enter your OTP code</p>
+                </div>
+
+                <form id="otp-form" action="" method = "POST">
+                    <div class="credential-container">
+                        <div class="input-container">
+                            <div class="input-item-container">
+                                <input id="text" type="text" placeholder="Enter OTP code" name="otp">
+                            </div>
+                        </div>
+                        <p class="invalid-text" id="invalid-email"></p>
+                    </div>
+
+                    <button type="button" class="input-container" id="login">
+                        <p>Continue</p>
+                    </button>
+                </form>
+
+                <div class="create-acc-p">
+                    <p>Didn't receive any code?</p>
+                    <a id="send-opt" class="p-links">Resend new code</a>
+                </div>
             </div>
-        </main>
-
+        </div>
+        
+        <script src="./script.js"></script>
     </body>
 </html>

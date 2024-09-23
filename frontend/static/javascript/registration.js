@@ -4,7 +4,7 @@ function openCloseLock(lock1, lock2, inputField){
     const passwordInput = document.querySelector(inputField);
     
     if (lockIcon){
-        var open = false;
+        let open = false;
         function lockFunction() {
             lockIcon.classList.toggle('active');
             lockIcon2.classList.toggle('activate');
@@ -79,7 +79,7 @@ document.getElementById('register').addEventListener('click', async function(eve
 
     if(password2Input == ""){
         passwordErrorMessage.textContent = "Invalid password. Password can't be empty";
-        validPass = false;
+        validPassword = false;
         event.preventDefault();
     }
     else{

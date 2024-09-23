@@ -1,0 +1,8 @@
+Flask
+flask-cors
+authlib.integrations.flask_client
+sqlite3
+google-auth
+google-api-python-client
+oauth2client
+numpy

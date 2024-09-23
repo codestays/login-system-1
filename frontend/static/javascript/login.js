@@ -65,20 +65,20 @@ document.getElementById("login").addEventListener("click", async function(event)
         }
     }
     
-    // if(validEmail & validPassword){
-    //     let response = await fetch("http://127.0.0.1:5000/login-form", {
-    //         method: "POST",
-    //         body: JSON.stringify({
-    //             email: emailInput,
-    //             password: passwordInput
-    //         }),
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         }
-    //     })
-    //     .then(response => response.json())
-    //     .then(jsonData => {});
-    // }
+    if(validEmail && validPassword){
+        let response = await fetch("http://127.0.0.1:5000/login-form", {
+            method: "POST",
+            body: JSON.stringify({
+                email: emailInput,
+                password: passwordInput
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(jsonData => {});
+    }
 
 });
