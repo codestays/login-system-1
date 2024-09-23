@@ -135,6 +135,8 @@ form{
     gap: 20px;
 }
 
+
+
 .credential-container{
     display:flex; 
     flex-direction:column; 
@@ -214,18 +216,25 @@ input{
 }
 
 
-#register{
+#register, #otp{
     border:none; 
     background-color: var(--black);
     color: var(--white);
     cursor: pointer;
 }
-#register:hover{
+#register:hover, #otp:hover{
     background-color: var(--black_hover);
     border:none;
 }
 
-
 .space-1{
     height:20px;
+}
+
+
+.create-acc-p{
+    display:flex; 
+    justify-content:center; 
+    gap:4px;
+    margin-top: 20px;
 }

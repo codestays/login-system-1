@@ -110,7 +110,7 @@ h1{
     height:80px;
 }
 
-.main-container{
+.otp-main-container{
     display:flex; 
     justify-content:center; 
     align-items:center;
@@ -118,7 +118,7 @@ h1{
     padding-bottom: 40px;
 }
 
-.login-card{
+.otp-card{
     display:flex; 
     flex-direction:column; 
     width:360px;
@@ -130,7 +130,7 @@ h1{
     }
 }
 
-.card-header{
+.otp-card-header{
     display: flex;
     flex-direction:column; 
     justify-content:center; 
@@ -184,13 +184,13 @@ input{
     border:none;
 }
 
-#login{
+#login, #otp{
     border:none; 
     background-color: var(--black);
     color: var(--white);
     cursor: pointer;
 }
-#login:hover{
+#login:hover, #otp:hover{
     background-color: var(--black_hover);
     border:none;
 }

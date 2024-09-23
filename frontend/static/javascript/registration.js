@@ -1,13 +1,20 @@
+const formPage = document.getElementById("main-container");
+const otpPage = document.getElementById("otp-container");
+
+otpPage.style.display = "none";
+
+
 function openCloseLock(lock1, lock2, inputField){
     const lockIcon = document.querySelector(lock1);
     const lockIcon2 = document.querySelector(lock2);
     const passwordInput = document.querySelector(inputField);
+
     
     if (lockIcon){
         let open = false;
         function lockFunction() {
             lockIcon.classList.toggle('active');
-            lockIcon2.classList.toggle('activate');
+            lockIcon2.classList.toggle('active');
 
             open = !open;
             if(open){
@@ -104,15 +111,14 @@ document.getElementById('register').addEventListener('click', async function(eve
     } 
     
 
-    if(validPassword && validEmail && validSurname && validName && validRetypePassword){
-        alert("ready to move");
-        const response = await fetch('http://127.0.0.1:5000/registration-form', {
+    if((validPassword && validEmail && validSurname && validName && validRetypePassword) || true){
+        await fetch('http://127.0.0.1:5000/registration-form', {
             method: 'POST',
             body:JSON.stringify({
                 name: nameInput,
                 surname: surnameInput,
                 email: emailInput,
-                password: retypePasswordInput,
+                password: password2Input,
             }),
             headers: {
                 'Accept': 'application/json',
@@ -120,14 +126,49 @@ document.getElementById('register').addEventListener('click', async function(eve
             }
         })
         .then(response => response.json())
-        .then(data => {
-            if(data.status == "successful"){
-                alert("Registration complete");
-                window.location.href = ("login");
-            }
-            else{
-                emailErrorMessage.textContent = "Email is already in use";
-            }
+        .then((data)=>{
+            formPage.style.display = 'none'; 
+            otpPage.style.display = "flex";
+
+            document.getElementById("otp").addEventListener("click", async function(event){
+                const codeInput = document.getElementById('text').value.trim();
+                const invalidOtpMessage = document.getElementById("invalid-otp");
+                invalidOtpMessage.textContent = "";
+                let validOtp = true;
+
+                if(codeInput == ""){
+                    invalidOtpMessage.textContent = "Invalid OTP. OTP can't not be empty.";
+                    validOtp = false;
+                    event.preventDefault();
+                }
+                else{
+                    if(codeInput != data.code){
+                        invalidOtpMessage.textContent = "Invalid OTP. Please check the code.";
+                        validOtp = false;
+                        event.preventDefault();
+                    }
+                }
+
+                if(validOtp){
+                    await fetch("http://127.0.0.1:5000/otp-form", {
+                        method: 'POST',
+                        body:JSON.stringify({
+                            email: emailInput,
+                            code: codeInput
+                        }),
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data_json=>{
+                        if(data_json.status == "200"){
+                            window.location.href = ("home");
+                        }
+                    });
+                }
+            });
         });  
     }
 });
