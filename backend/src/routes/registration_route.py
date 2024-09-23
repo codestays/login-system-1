@@ -1,5 +1,12 @@
 from flask import request, render_template, jsonify
 import json
+import random
+
+
+def generate_random_numbers():
+    numbers = [str(random.randint(0, 9)) for _ in range(4)] 
+    return ''.join(numbers) 
+
 
 def registration(app):
     @app.route("/registration", methods=["GET"])
@@ -9,7 +16,8 @@ def registration(app):
 
     @app.route("/registration-form", methods=["POST"])
     def registrationForm():
-        code = "1234"
+        code = generate_random_numbers()
+        print(code)
         
         if request.method == "POST":
             requestData = request.json

@@ -13,6 +13,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'configuration'))
 sys.path.append(os.path.join(os.path.dirname(__file__), 'auth'))
 sys.path.append(os.path.join(os.path.dirname(__file__), 'routes'))
 
+
 from flask import Flask
 from flask_cors import CORS
 from authlib.integrations.flask_client import OAuth

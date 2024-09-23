@@ -129,7 +129,7 @@ document.getElementById('register').addEventListener('click', async function(eve
         .then((data)=>{
             formPage.style.display = 'none'; 
             otpPage.style.display = "flex";
-
+            
             document.getElementById("otp").addEventListener("click", async function(event){
                 const codeInput = document.getElementById('text').value.trim();
                 const invalidOtpMessage = document.getElementById("invalid-otp");
